@@ -2,6 +2,8 @@ import yaml
 import logging.config
 from os import path
 
+"""Setup logger configuration"""
+
 DAG_FOLDER_PATH = path.dirname(__file__)
 CONFIG_PATH = path.join(DAG_FOLDER_PATH, "..", "config")
 CONFIG_FILE_NAME = "log_config.yml"

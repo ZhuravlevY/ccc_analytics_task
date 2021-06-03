@@ -12,6 +12,9 @@ def upload_string_to_s3(s3_client: boto3.client,
                         data: str,
                         bucket_name: str,
                         path: str) -> bool:
+
+    """Upload string data to S3 bucket"""
+
     try:
         logger.info(f"[upload_string_to_s3] - Start - "
                     f"bucket_name={bucket_name} "

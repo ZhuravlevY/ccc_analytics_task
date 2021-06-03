@@ -7,15 +7,18 @@ from newsapi import NewsApiClient
 logger = logging.getLogger(__name__)
 SourceAttributes = namedtuple("SourceAttributes", ["id", "name"])
 
+
 def get_top_headlines(news_api: NewsApiClient,
-                      q=None,
-                      qintitle=None,
-                      sources=None,
-                      language="en",
-                      country=None,
-                      category=None,
-                      page_size=None,
-                      page=None) -> json:
+                      q: str = None,
+                      qintitle: str = None,
+                      sources: str = None,
+                      language: str = "en",
+                      country: str = None,
+                      category: str = None,
+                      page_size: str = None,
+                      page: str = None) -> json:
+    """Call the `/top-headlines` endpoint."""
+
     try:
         logger.info(f"[get_top_headlines] - Start - "
                     f"q={q} "
@@ -41,11 +44,15 @@ def get_top_headlines(news_api: NewsApiClient,
         logger.error(repr(ex))
 
 
-
 def get_sources_id(news_api: NewsApiClient,
-                   category=None,
-                   language=None,
-                   country=None) -> SourceAttributes:
+                   category: str = None,
+                   language: str = None,
+                   country: str = None) -> SourceAttributes:
+
+    """Call the `/sources` endpoint.
+
+        Fetch the subset of news publishers that /top-headlines are available from."""
+
     try:
         logger.info(f"[get_sources_id] - Start - "
                     f"category={category} "

@@ -30,13 +30,16 @@ logger = logging.getLogger(__name__)
 
 
 def store_top_headlines_ito_s3():
-    logger.info(f"Start processing")
+
+    """Get live top and breaking headlines for English sources and store them in S3 bucket"""
+
+    logger.info("[store_top_headlines_ito_s3] - Start processing")
     for source_attr in get_sources_id(news_api=news_api, language="en"):
         top_headlines = str(get_top_headlines(news_api=news_api, sources=source_attr.id))
         current_timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-        path = f"test/{source_attr.name}/{current_timestamp}_headlines.csv"
+        file_path = f"test/{source_attr.name}/{current_timestamp}_headlines.csv"
         upload_string_to_s3(s3_client=client,
                             data=top_headlines,
                             bucket_name=BUCKET_NAME,
-                            path=path)
-    logger.info(f"End processing")
+                            path=file_path)
+    logger.info("[store_top_headlines_ito_s3] - End processing")
