@@ -37,7 +37,7 @@ def store_top_headlines_ito_s3():
     for source_attr in get_sources_id(news_api=news_api, language="en"):
         top_headlines = str(get_top_headlines(news_api=news_api, sources=source_attr.id))
         current_timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-        file_path = f"test/{source_attr.name}/{current_timestamp}_headlines.csv"
+        file_path = f"{source_attr.name}/{current_timestamp}_headlines.csv"
         upload_string_to_s3(s3_client=client,
                             data=top_headlines,
                             bucket_name=BUCKET_NAME,
